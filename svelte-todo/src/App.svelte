@@ -10,13 +10,16 @@
 		{ id: ++nextId, isDone: false, text: 'make a angular todo list' },
 	]
 
+	let showAllTodos = true
+
 	function addTodo() {
 		todos = [...todos, { id: ++nextId, isDone: false, text: todo }]
 		todo = ''
 	}
 
+	$: filteredTodos = showAllTodos ? todos : todos.filter(t => !t.isDone)
 	$: allTodos = todos.length
-	$: completedTodos = todos.filter(todo => todo.isDone).length
+	$: completedTodos = todos.filter(t => t.isDone).length
 	$: allComplete = completedTodos === allTodos
 
 </script>
@@ -26,9 +29,13 @@
 	<form on:submit|preventDefault={addTodo} class="todo-head">
 		<input type="text" class="todo-head__input" bind:value={todo}>
 	</form>
+	<label for="show-all-todos">
+		show all?
+		<input name="show-all-todos" type="checkbox" bind:value={showAllTodos} bind:checked={showAllTodos}>
+	</label>
 	<div class="todo-list">
 		<ul class="todos">
-			{#each todos as todo}
+			{#each filteredTodos as todo}
 				<li class="todo {todo.isDone ? 'todo--done' : ''}" >
 					<input id={`${todo.id}--checkbox`} type="checkbox" class="todo__checkbox" bind:value={todo.isDone} bind:checked={todo.isDone}>
 					<span class="todo__text">{todo.text}</span>

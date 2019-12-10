@@ -1,3 +1,14 @@
+:root {
+	--spacing: 15px;
+
+	--bg: #f7fbfe;
+	--main-bg: #fff;
+	--text-color: #475e77;
+
+	--brand-green: #2fb471;
+	--brand-orange: #e07044;
+}
+
 html,
 body {
 	position: relative;
@@ -6,9 +17,10 @@ body {
 }
 
 body {
-	color: #333;
+	color: var(--text-color);
 	margin: 0;
-	padding: 8px;
+	padding: 0;
+	background: var(--bg);
 	box-sizing: border-box;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
@@ -153,4 +165,11 @@ button {
 	display: inline-block;
 	line-height: 1;
 	cursor: pointer;
+}
+
+body {
+	display: grid;
+  grid-template-columns: minmax(20px,150px) minmax(20px, 150px) 1fr 1fr 1fr;
+  grid-template-rows: minmax(20px, 80px) minmax(20px, auto);
+  grid-template-areas: "header header header header header" "aside aside main main main";
 }

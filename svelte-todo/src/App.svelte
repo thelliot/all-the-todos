@@ -27,6 +27,9 @@ import TodoList from './components/TodoList.svelte'
     }
 
     &__title {
+      &--selected {
+        color: var(--brand-blue);
+      }
       &--done {
         color: var(--brand-green);
       }
@@ -43,7 +46,7 @@ import TodoList from './components/TodoList.svelte'
   <ul class="nav-items">
     {#each navItems as item}
       <li class="nav-item">
-        <h3 class="nav-item__title {item.isComplete ? '' : ''}">{item.title}</h3>
+        <h3 class="nav-item__title {item.isSelected ? 'nav-item__title--selected' : ''}">{item.title}</h3>
       </li>
     {/each}
   </ul>

@@ -1,28 +1,24 @@
 import {
 	writable
 } from 'svelte/store';
-import {
-	v1 as uuid
-} from 'uuid'
-
 
 const initialTodos = [{
-		id: uuid(),
+		id: 0,
 		isDone: true,
 		text: "make a svelte todo list"
 	},
 	{
-		id: uuid(),
+		id: 1,
 		isDone: false,
 		text: "make a vue todo list"
 	},
 	{
-		id: uuid(),
+		id: 2,
 		isDone: false,
 		text: "make a react todo list"
 	},
 	{
-		id: uuid(),
+		id: 3,
 		isDone: false,
 		text: "make a angular todo list"
 	}

@@ -1,28 +1,40 @@
 <script>
-  import { writable } from 'svelte/store';
+  import {
+    writable
+  } from 'svelte/store';
+  import { todos } from './store/todos';
 
-  const baseId = 0;
-  let nextId = baseId;
   let todo = "";
 
-  let initialTodos = [
-    { id: baseId, isDone: true, text: "make a svelte todo list" },
-    { id: ++nextId, isDone: false, text: "make a vue todo list" },
-    { id: ++nextId, isDone: false, text: "make a react todo list" },
-    { id: ++nextId, isDone: false, text: "make a angular todo list" }
-  ];
+  const showAllTodos = writable(true);
 
-  let showAllTodos = true;
+  let allTodos;
+  let filteredTodos
+  let completedTodos
+  let allComplete
+  let unfinishedTodos
+
+  const unsubscribe = todos.subscribe(all => {
+    allTodos = all
+    unfinishedTodos = allTodos.filter(t => !t.isDone)
+    filteredTodos = showAllTodos ? allTodos : unfinishedTodos
+    completedTodos = filteredTodos.filter(t => t.isDone).length
+    allComplete = completedTodos === allTodos
+  })
 
   function addTodo() {
-    todos = [...todos, { id: ++nextId, isDone: false, text: todo }];
+    todos.update(t => [...t, { id: allTodos.length, isDone: false, text: todo }])
     todo = "";
   }
 
-  $: filteredTodos = showAllTodos ? initialTodos : initialTodos.filter(t => !t.isDone);
-  $: allTodos = initialTodos.length;
-  $: completedTodos = initialTodos.filter(t => t.isDone).length;
-  $: allComplete = completedTodos === allTodos;
+  const handleStatusChange = () => {    
+    todos.update(t => [...t])
+  }
+
+  const handleShowAllChange = () => {
+    showAllTodos.update(t => !t)
+  }
+
 </script>
 
 <style lang="scss">
@@ -48,7 +60,7 @@
 
   .todo-options {
     display: flex;
-    padding: var(--spacing) 0;
+    padding: var(--spacing);
     text-align: right;
 
     &__checkbox {
@@ -84,7 +96,11 @@
   }
 
   .todos-info {
-    padding: 2rem;
+    padding: var(--spacing);
+    &__heading {
+      font-size: 1rem;
+      font-weight: 400;
+    }
   }
 </style>
 
@@ -95,16 +111,11 @@
     <input type="text" class="todo-head__input" placeholder="add new todo..." bind:value={todo} />
   </label>
 </form>
-<label for="show-all-todos" class="todo-options">
-  <input
-    name="show-all-todos"
-    type="checkbox"
-    class="todo-options__checkbox"
-    bind:value={showAllTodos}
-    bind:checked={showAllTodos} 
-  />
-  show all?
-</label>
+<div class="todos-info">
+  <h4 class="heading todos-info__heading">
+    {unfinishedTodos.length} unfinished tasks
+  </h4>
+</div>
 <div class="todo-list">
   <ul class="todos">
     {#each filteredTodos as todo}
@@ -115,6 +126,7 @@
             id={`${todo.id}--checkbox`}
             type="checkbox"
             class="todo__checkbox"
+            on:change={handleStatusChange}
             bind:value={todo.isDone}
             bind:checked={todo.isDone} />
         </label>
@@ -122,12 +134,4 @@
       </li>
     {/each}
   </ul>
-</div>
-<div class="todos-info">
-  <h2 class="heading">
-    you have completed: {completedTodos}/{allTodos} todos
-  </h2>
-  {#if allComplete}
-    <h3>🥳Hurray, all todos are complete! 🥳</h3>
-  {/if}
 </div>

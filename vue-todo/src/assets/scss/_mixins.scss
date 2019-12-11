@@ -1,3 +1,25 @@
+@mixin respond-to($breakpoint, $condition: 'min-width') {
+
+  // If the key exists in the map we load the breakpoint from there
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint : map-get($breakpoints, $breakpoint);
+  }
+  // If the key doesn't exist in the map we assume a custom amount
+  @if($condition == 'min-width') {
+    @media only screen and (min-width: $breakpoint) {
+      @content;
+    }
+  }
+  @else if($condition == 'max-width') {
+    @media only screen and (max-width: $breakpoint - 1px) {
+      @content;
+    }
+  }
+  @else {
+    @warn "you made a typo in your condition, it should be either 'min-width' or 'max-width'";
+  }
+}
+
 $rem-baseline: 16px !default;
 $rem-fallback: false !default;
 $rem-px-only: false !default;

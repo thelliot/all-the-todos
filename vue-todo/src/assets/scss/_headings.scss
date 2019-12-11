@@ -1,0 +1,36 @@
+h1, h2, h3, h4, .heading {
+  font-weight: 700;
+}
+
+h1, .heading--xlarge {
+  font-size: rem(32px);
+  @include respond-to('medium') {
+    font-size: rem(40px);
+  }
+}
+
+h2, .heading--large {
+  font-size: rem(24px);
+  @include respond-to('medium') {
+    font-size: rem(32px);
+  }
+}
+
+h3, .heading--medium {
+  font-size: rem(20px);
+  @include respond-to('medium') {
+    font-size: rem(22px);
+  }
+}
+
+h4, .heading--small {
+  font-size: rem(17px);
+}
+
+.heading--center {
+  text-align: center;
+}
+
+.heading--inline {
+  display: inline;
+}

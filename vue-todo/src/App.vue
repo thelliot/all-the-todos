@@ -13,6 +13,7 @@
 </template>
 
 <script>
+// import { store } from './store/index'
 import Header from './components/Header'
 import TodoList from './components/TodoList'
 

@@ -30,13 +30,14 @@ const initialTodos = [
 export const store = new Vuex.Store({
   state: {
     todos: [...initialTodos],
-    displayAll: true,
+    displayAll: false,
   },
   getters: {
-    totalTodos: (state) => state.todos.length,
-    completedTodos: (state) => state.todos.filter(t => t.isDone).length,
-    incompleteTodos: (state) => state.todos.filter(t => !t.isDone),
-    totalCompletedTodos: (state) => state.todos.filter(t => !t.isDone).length,
+    todos: (state) => state.todos,
+    totalTodos: (state, getters) => getters.todos.length,
+    completedTodos: (state, getters) => getters.todos.filter(t => t.isDone).length,
+    incompleteTodos: (state, getters) => getters.todos.filter(t => !t.isDone),
+    totalCompletedTodos: (state, getters) => getters.todos.filter(t => !t.isDone).length,
     displayAll: (state) => state.displayAll,
   },
   mutations: {

@@ -7,3 +7,10 @@ $spacing: 15px;
 $bg-color: #f7fbfe;
 $main-bg: #fff;
 $text-color: #475e77;
+
+$breakpoints: (
+  'xsmall': 320px,
+  'small': 480px,
+  'medium': 768px,
+  'large': 1024px
+) !default;

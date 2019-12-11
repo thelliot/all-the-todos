@@ -35,10 +35,13 @@ body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 aside {
   grid-area: aside;
   padding: $spacing;
+  background: #898fff;
+  color: $bg-color;
 }
 
 main {

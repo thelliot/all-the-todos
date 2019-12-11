@@ -28,12 +28,12 @@ $border-radius: 3px;
   display: flex;
   height: $bar-height;
   width: 100%;
-  background: rgba($brand-green, 0.1);
+  background: rgba($bg-color, 0.25);
   border-radius: $border-radius;
   margin: $spacing 0;
 
   &__inner {
-    background: $brand-green;
+    background: $bg-color;
     height: $bar-height;
     transition: width 400ms ease-out;
     border-radius: $border-radius;

@@ -10,7 +10,7 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
-	color: $brand-blue;
+	color: $bg-color;
 	text-transform: uppercase;
 	font-size: 2rem;
 	font-weight: 900;

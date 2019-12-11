@@ -51,10 +51,15 @@ export default {
   align-items: center;
   grid-area: logo;
   padding: $spacing;
+  background: $brand-blue;
 }
 .list-info {
-  padding: ($spacing * 2) $spacing;
+  padding: $spacing;
   grid-area: list-info;
+  display: flex;
+  align-items: center;
+  color: $bg-color;
+  background: #898fff;
 
   &__content {
     display: inline-block;

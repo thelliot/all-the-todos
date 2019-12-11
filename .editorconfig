@@ -1,0 +1,29 @@
+# top-most EditorConfig file
+root = true
+
+# new line for every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true;
+
+# default charset
+charset = utf-8
+
+# the people have spoken and the people want tabs
+indent_style = tab
+
+# seems like it isn't supported for VS, but let's put it here anyway
+# see also https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties#max_line_length
+max_line_length = 120
+
+[*.{ts,js,vue,json,scss}]
+charset = utf-8
+indent_style = spaces
+indent_size = 2
+end_of_line = lf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false

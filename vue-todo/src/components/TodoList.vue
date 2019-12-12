@@ -1,7 +1,7 @@
 <template>
   <section class="todo-list">
     <form v-on:submit.prevent="addTodo">
-      <input type="text" v-model="todo" class="todo-list__input" placeholder="add new todo..." />
+      <input type="text" v-model="todo" class="todo-list__input" placeholder="add new entry..." />
     </form>
     <Options />
     <div class="completed" v-if="complete">

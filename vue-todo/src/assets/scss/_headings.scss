@@ -1,10 +1,10 @@
 h1, h2, h3, h4, .heading {
+  font-family: $font-headings;
   font-weight: 700;
 }
 
 h1, .heading--xlarge {
   font-size: rem(32px);
-  font-weight: 900;
   @include respond-to('medium') {
     font-size: rem(40px);
   }

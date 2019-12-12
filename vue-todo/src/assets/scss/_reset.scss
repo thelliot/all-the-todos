@@ -30,8 +30,8 @@ dd {
 body {
   scroll-behavior: smooth;
   line-height: 1.5;
-  font-family: 'museo';
-  font-weight: 500;
+  font-family: $font-body;
+  font-weight: 400;
   font-size: rem(17px);
 }
 // Remove list styles on ul, ol elements with a class attribute

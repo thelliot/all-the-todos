@@ -16,10 +16,12 @@
 </template>
 
 <script>
+import { ElementMixin } from 'vue-slicksort';
 import { store } from '../store/index.js'
 
 export default {
   name: 'TodoItem',
+  mixins: [ElementMixin],
   props: {
     todo: {
       type: Object,

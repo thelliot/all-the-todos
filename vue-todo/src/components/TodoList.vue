@@ -7,9 +7,9 @@
     <div class="completed" v-if="complete">
       <DoneMessage />
     </div>
-    <ol class="todo-list__todos">
-      <TodoItem v-for="todo in filteredTodos" :key="todo.id" :todo="todo" />
-    </ol>
+    <SortableContainer lockAxis="y" v-model="todos" class="todo-list__todos" :transitionDuration="0" :pressDelay="150" @sort-end="reorderTodos">
+      <TodoItem v-for="(todo, index) in todos" :index="index" :key="todo.id" :todo="todo" />
+    </SortableContainer>
   </section>
 </template>
 
@@ -18,6 +18,7 @@ import { store } from '../store/index'
 import TodoItem from './TodoItem.vue'
 import Options from './Options.vue'
 import DoneMessage from './DoneMessage.vue'
+import SortableContainer from './SortableContainer.vue'
 
 export default {
   name: 'TodoList',
@@ -25,13 +26,21 @@ export default {
     Options,
     TodoItem,
     DoneMessage,
+    SortableContainer
   },
   data() {
     return {
-      todo: ''
+      todo: '',
+      todos: []
     }
   },
+  mounted() {
+    this.todos = this.filteredTodos
+  },
   computed: {
+    allTodos() {
+      return store.getters.todos
+    },
     filteredTodos() {
       return store.getters.displayAll ? store.getters.todos : store.getters.incompleteTodos
     },
@@ -45,7 +54,15 @@ export default {
       store.commit('addTodo', this.todo)
       this.todo = ''
     },
+    reorderTodos() {
+      this.todos = this.filteredTodos
+    },
   },
+  watch: {
+    filteredTodos() {
+      this.reorderTodos()
+    }
+  }
 }
 </script>
 

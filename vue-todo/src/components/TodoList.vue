@@ -5,7 +5,7 @@
     </form>
     <Options />
     <div class="completed" v-if="complete">
-      <h3 class="heading heading--medium">🎉All done for today! 🎉</h3>
+      <DoneMessage />
     </div>
     <ol class="todo-list__todos">
       <TodoItem v-for="todo in filteredTodos" :key="todo.id" :todo="todo" />
@@ -17,12 +17,14 @@
 import { store } from '../store/index'
 import TodoItem from './TodoItem.vue'
 import Options from './Options.vue'
+import DoneMessage from './DoneMessage.vue'
 
 export default {
   name: 'TodoList',
   components: {
     Options,
     TodoItem,
+    DoneMessage,
   },
   data() {
     return {
@@ -63,8 +65,6 @@ export default {
   padding: $spacing;
   min-height: 200px;
   border: 2px dashed rgba($brand-green, 0.25);
-  .heading {
-    margin: 0;
-  }
+  margin-bottom: 12px;
 }
 </style>

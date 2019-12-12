@@ -2,7 +2,7 @@
   <div class="options">
     <span class="options__item">
       <input type="checkbox" name="" id="" v-model="showAllTodos" :value="showAllTodos" @change="updateTodoList" :checked="showAllTodos">
-      show all?
+      show completed?
     </span>
   </div>
 </template>

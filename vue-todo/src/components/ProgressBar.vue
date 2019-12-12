@@ -8,13 +8,13 @@
 export default {
   name: 'ProgressBar',
   props: {
-    current: Number,
+    currentProgress: Number,
     max: Number,
   },
   computed: {
     calcWidth() {
       const minWidth = 100 / this.max
-      return this.current * minWidth;
+      return this.currentProgress * minWidth;
     }
   },
 }

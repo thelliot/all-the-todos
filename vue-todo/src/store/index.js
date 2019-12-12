@@ -1,31 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import uuid from 'uuid/v4'
+import { initialTodos } from '../constants';
 
 Vue.use(Vuex)
-
-const initialTodos = [
-  {
-    id: uuid(),
-    isDone: true,
-    text: "make a svelte todo list"
-  },
-  {
-    id: uuid(),
-    isDone: false,
-    text: "make a vue todo list"
-  },
-  {
-    id: uuid(),
-    isDone: false,
-    text: "make a react todo list"
-  },
-  {
-    id: uuid(),
-    isDone: false,
-    text: "make a angular todo list"
-  }
-];
 
 export const store = new Vuex.Store({
   state: {

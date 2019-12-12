@@ -7,7 +7,7 @@
       <div class="list-info__content">
         <ListTitle :title="title" />
         <TodosLeft />
-        <ProgressBar :current="current" :max="max" />
+        <ProgressBar :current-progress="currentProgress" :max="max" />
       </div>
     </div>
   </header>
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    current() {
+    currentProgress() {
       return store.getters.completedTodos
     },
     max() {

@@ -1,27 +1,26 @@
 <template>
-  <li class="todo" :class="{'todo--done': todo.isDone }">
+  <div class="todo__inner" :class="{'todo--done': todo.isDone }">
     <label :for="`todo--${todo.id}`">
-      <input type="checkbox"
-             :name="`todo--${todo.id}`"
-             :id="`todo--${todo.id}`"
-             :value="isDone"
-             v-model="isDone"
-             @change="completeTodo"
-             :checked="isDone"
-             class="todo__checkbox"
-      >
+    <input type="checkbox"
+            :name="`todo--${todo.id}`"
+            :id="`todo--${todo.id}`"
+            :value="isDone"
+            v-model="isDone"
+            @change="completeTodo"
+            :checked="isDone"
+            class="todo__checkbox"
+    >
     </label>
     <span class="todo__text">{{ todo.text }}</span>
-  </li>
+  </div>
 </template>
 
 <script>
-import { ElementMixin } from 'vue-slicksort';
+
 import { store } from '../store/index.js'
 
 export default {
   name: 'TodoItem',
-  mixins: [ElementMixin],
   props: {
     todo: {
       type: Object,
@@ -60,6 +59,11 @@ export default {
     text-decoration: line-through;
     color: #2fb471;
   }
+
+  &__inner {
+    display: flex;
+  }
+
   &__label {
     display: flex;
   }

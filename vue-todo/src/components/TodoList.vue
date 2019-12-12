@@ -7,12 +7,16 @@
     <div class="completed" v-if="complete">
       <DoneMessage />
     </div>
-    <SortableContainer lockAxis="y" v-model="todos" class="todo-list__todos" :transitionDuration="0" :pressDelay="150" @sort-end="updateTodos">
-      <TodoItem v-for="(todo, index) in todos" :index="index" :key="todo.id" :todo="todo" />
+    <SortableContainer lock-axis="y" v-model="todos" class="todo-list__todos" :transition-duration="0" :press-delay="150" @sort-end="updateTodos">
+      <DraggableItem v-for="(todo, index) in todos" :key="todo.id" :index="index" class="todo">
+        <TodoItem :todo="todo" />
+      </DraggableItem>
     </SortableContainer>
     <div v-if="showCompletedTodos" class="completed-todos">
       <ol class="todo-list__todos">
-        <TodoItem v-for="(todo, index) in completeTodos" :index="index" :key="todo.id" :todo="todo" />
+        <li v-for="todo in completeTodos" :key="todo.id" class="todo" >
+          <TodoItem :todo="todo" />
+        </li>
       </ol>
     </div>
   </section>
@@ -24,6 +28,7 @@ import TodoItem from './TodoItem.vue'
 import Options from './Options.vue'
 import DoneMessage from './DoneMessage.vue'
 import SortableContainer from './SortableContainer.vue'
+import DraggableItem from './DraggableItem.vue'
 
 export default {
   name: 'TodoList',
@@ -31,16 +36,19 @@ export default {
     Options,
     TodoItem,
     DoneMessage,
-    SortableContainer
+    SortableContainer,
+    DraggableItem
   },
   data() {
     return {
       todo: '',
-      todos: []
+      todos: [],
+      completeTodos: []
     }
   },
   mounted() {
     this.todos = this.allUncompleteTodos
+    this.completeTodos = this.completedTodos
   },
   computed: {
     allUncompleteTodos() {
@@ -49,7 +57,7 @@ export default {
     showCompletedTodos() {
       return store.getters.displayAll
     },
-    completeTodos() {
+    completedTodos() {
       return store.getters.todos.filter(t => t.isDone)
     },
     complete() {
@@ -65,13 +73,16 @@ export default {
     updateTodos() {
       this.todos = this.allUncompleteTodos
     },
+    updateCompletedTodos() {
+      this.completeTodos = this.completedTodos
+    }
   },
   watch: {
-    filteredTodos() {
-      this.updateTodos()
-    },
     allUncompleteTodos() {
       this.updateTodos()
+    },
+    completedTodos() {
+      this.updateCompletedTodos()
     }
   }
 }

@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     todos: [...initialTodos],
-    displayAll: false,
+    displayAll: true,
   },
   getters: {
     todos: (state) => state.todos,
